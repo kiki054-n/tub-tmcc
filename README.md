@@ -67,6 +67,7 @@ M：質（要素数）。不変。
 | ファイル | 内容 |
 |---------|------|
 | `01-docs-three-field-gravity-equation.md` | 3要素の万有引力の法則（草案v0.1） |
+| `01-docs-three-field-gravity-equation-v0.2.md` | 3要素の万有引力の法則（草案v0.2：重力は全質量、電気の力は双極のF、プランク単位、2026-11-07 の検証結果） |
 | `02-docs-mass-ratio-decimal-draft.md` | 質量比1836の小数部の起源 |
 
 ### 検証・計算記録
