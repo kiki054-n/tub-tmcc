@@ -1,4 +1,18 @@
-# TUB-TMCC（TTT Unified Bonding / Three-Field Matter Chemical Composition）
+# **TUB-TMCC      tub-tmcc**
+
+**TTT Unified Bonding / Three-Field Matter Chemical Composition**
+
+> 質・量・関係の3要素で結合と物質状態を統一的に記述する、トリテトラ理論（TTT）の応用フレームワーク
+
+---
+
+## **概要**
+
+本リポジトリは、トリテトラ理論（TTT）の幾何学的原理を化学結合・物質状態・材料組成設計に展開するための理論草案と検証記録を管理します。
+
+従来の化学結合理論は「共有」「イオン」「金属」「水素」など現象ごとに分類されています。本理論は、すべての結合を **質（Mass）・量（Energy/Field）・関係（Relation）の3要素** と、** 質の中心（Cm）と量の中心（Ce）の位置関係** によって統一的に記述します。
+
+---# TUB-TMCC（TTT Unified Bonding / Three-Field Matter Chemical Composition）
 
 > トリテトラ理論（TTT）3要素方程式による結合・物質状態・組成設計の記録リポジトリ
 
