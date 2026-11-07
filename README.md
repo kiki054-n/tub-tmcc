@@ -83,6 +83,7 @@ M：質（要素数）。不変。
 |---------|------|
 | `05-materials-three-phases.md` | 固体・液体・気体の3相（3つの力の釣り合い） |
 | `06-materials-plasma-fourth-phase.md` | プラズマ（4相目）の3つの場の分離 |
+| `07-materials-lines-lattices-phases.md` | 線と格子：第2周期・3つの層・水の4状態・C と BN・ペロブスカイト・ニッケル酸化物超電導の照合（2026-11-07） |
 
 ### リポジトリ構造
 
