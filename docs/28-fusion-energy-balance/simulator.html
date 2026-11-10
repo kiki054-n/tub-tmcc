@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>羅針盤・目的別：水素核融合のエネルギー収支 ― TUB-TMCC 28</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f7f3ec; --surface: #fffdf9; --ink: #1a1a1a; --muted: #6b6560;
+  --accent: #b23a2e; --accent-weak: #f6e9e4;
+  --a: #2f6b4f; --a-weak: #e5efe8; --b: #9a6a12; --b-weak: #f5ecd9; --c: #5b5f8a; --c-weak: #e8e9f2;
+  --line: rgba(26,26,26,0.12); --radius: 12px;
+  --shadow: 0 1px 2px rgba(0,0,0,0.04), 0 8px 24px -12px rgba(0,0,0,0.15);
+  --serif: "Noto Serif JP", "Hiragino Mincho ProN", "Yu Mincho", serif;
+  --rA: #b23a2e; --rB: #2f6b4f; --rC: #5b5f8a; --obs: #1a1a1a;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: "Noto Sans JP", "Hiragino Sans", "Yu Gothic", sans-serif; font-size: 15px; line-height: 1.7;
+  color: var(--ink); background: var(--bg); overflow-wrap: anywhere; }
+a { color: var(--accent); }
+header, main { max-width: 1200px; margin: 0 auto; padding: 0 1.25rem; }
+header { padding-top: 1.5rem; }
+.eyebrow { font-size: 0.75rem; letter-spacing: 0.18em; color: var(--muted); }
+h1 { font-family: var(--serif); font-size: clamp(1.5rem, 1.2rem + 1.6vw, 2.3rem); line-height: 1.35; }
+.sub { font-family: var(--serif); color: var(--muted); margin: 0.25rem 0 1rem; }
+main { display: grid; gap: 1.25rem; padding-bottom: 3rem; grid-template-columns: minmax(0, 1fr); }
+.card { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: var(--shadow); padding: 1rem 1.1rem; }
+.card h2 { font-family: var(--serif); font-size: 1.1rem; margin-bottom: 0.6rem; }
+.card h2 small { font-family: inherit; font-size: 0.75rem; color: var(--muted); font-weight: 400; margin-left: 0.4rem; }
+.readings { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.75rem; }
+@media (max-width: 760px) { .readings { grid-template-columns: minmax(0, 1fr); } }
+.rd { border-radius: 10px; padding: 0.75rem 0.9rem; border: 1.5px solid var(--line); background: #fff; }
+.rd h3 { font-family: var(--serif); font-size: 1rem; }
+.rd .claim { font-size: 0.82rem; color: var(--muted); margin: 0.2rem 0 0.5rem; }
+.rd .verdict { font-family: var(--serif); font-size: 1.15rem; font-weight: 700; }
+.rd .why { font-size: 0.82rem; margin-top: 0.3rem; }
+.rd.A { border-color: var(--rA); } .rd.A .verdict { color: var(--rA); }
+.rd.B { border-color: var(--rB); } .rd.B .verdict { color: var(--rB); }
+.rd.C { border-color: var(--rC); } .rd.C .verdict { color: var(--rC); }
+table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
+th, td { text-align: left; padding: 0.4rem 0.5rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { font-family: var(--serif); font-weight: 600; background: #f1ece3; white-space: nowrap; }
+td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+input[type=number], input[type=text], select { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 6px; padding: 0.2rem 0.35rem; background: #fff; width: 100%; }
+input.n { text-align: right; font-variant-numeric: tabular-nums; }
+.ok { color: var(--a); font-weight: 600; } .ng { color: var(--accent); font-weight: 600; } .na { color: var(--muted); }
+.note { font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
+.row { display: flex; gap: 0.75rem; flex-wrap: wrap; align-items: center; font-size: 0.85rem; }
+.row label { display: flex; gap: 0.35rem; align-items: center; }
+button { font: inherit; font-size: 0.85rem; border: 1px solid var(--line); border-radius: 8px; padding: 0.35rem 0.7rem; background: var(--surface); cursor: pointer; }
+button:hover { border-color: var(--accent); color: var(--accent); }
+.legend { display: flex; flex-wrap: wrap; gap: 0.3rem 1rem; font-size: 0.78rem; color: var(--muted); margin-bottom: 0.4rem; }
+.legend i { display: inline-block; width: 12px; height: 10px; margin-right: 4px; vertical-align: -1px; border-radius: 2px; }
+svg text { font-family: "Noto Sans JP", sans-serif; }
+.scroll { overflow-x: auto; }
+details summary { cursor: pointer; font-size: 0.88rem; color: var(--muted); }
+footer { text-align: center; font-size: 0.8rem; color: var(--muted); padding: 1rem; }
+</style>
+</head>
+<body>
+<header>
+  <div class="eyebrow">TUB-TMCC 28 · 立体羅針盤・目的別</div>
+  <h1>水素核融合のエネルギー収支 ― 三つの読みを同じ入力で並べる</h1>
+  <p class="sub">入力は電子・陽子・中性子・水素原子・水素分子・ヘリウムの質量。値を書き換えると、すべての反応がその場で計算し直されます。</p>
+</header>
+
+<main>
+  <section class="card">
+    <h2>羅針盤の指す向き <small>測定された出力と照らした結果</small></h2>
+    <div class="readings" id="verdicts"></div>
+  </section>
+
+  <section class="card">
+    <h2>反応ごとの出力 <small>MeV、横棒は対数目盛</small></h2>
+    <div class="legend">
+      <span><i style="background:var(--obs)"></i>測定された出力（質量の差 Q）</span>
+      <span><i style="background:var(--rA)"></i>読みA の予測（0）</span>
+      <span><i style="background:var(--rC)"></i>読みC の予測（Δ空間 × 空間1つの質量）</span>
+    </div>
+    <div class="row" style="margin-bottom:0.5rem">
+      <label>読みC の空間1つの質量を合わせる反応
+        <select id="refSel"></select></label>
+      <span id="kOut" class="na"></span>
+    </div>
+    <div class="scroll"><svg id="bars" width="100%"></svg></div>
+  </section>
+
+  <section class="card">
+    <h2>反応の一覧</h2>
+    <div class="scroll"><table>
+      <thead><tr><th>反応</th><th class="num">Q（MeV）</th><th>測定</th><th class="num">取り分</th><th class="num">質 前→後</th><th class="num">Δ空間</th><th class="num">読みC の予測</th></tr></thead>
+      <tbody id="rtab"></tbody>
+    </table></div>
+  </section>
+
+  <section class="card">
+    <h2>入力 <small>質量（MeV）・質（要素数）・空間の数</small></h2>
+    <div class="row" style="margin-bottom:0.5rem">
+      <label><input type="checkbox" id="antiNeg" checked> 反電子（陽電子）の質を −500 にする（双極として扱う）</label>
+      <button id="reset">最初の値に戻す</button>
+    </div>
+    <div class="scroll"><table>
+      <thead><tr><th>粒子</th><th class="num">質量（MeV）</th><th>中身</th><th class="num">質</th><th class="num">空間の数</th></tr></thead>
+      <tbody id="itab"></tbody>
+    </table></div>
+    <p class="note">質量の初期値は CODATA 2018（電子・陽子・中性子）と AME2020（原子質量）。水素分子は 2×水素原子 − 解離エネルギー 4.4781 eV。質の初期値は <a href="../TTT質量欠損再解釈.md">TTT質量欠損再解釈.md</a> の表（電子 500・陽子 1500・中性子 2000）。空間の数は、水素分子2・ヘリウム1が本人の指定で、ほかは「原子・核・自由な粒子は1つにつき1」の仮置き。</p>
+  </section>
+
+  <section class="card">
+    <h2>読み方</h2>
+    <details open>
+      <summary>三つの読み</summary>
+      <div style="font-size:0.9rem;margin-top:0.5rem">
+        <p><b>読みA「出力そのものがない」</b>：核融合で外へ出るエネルギーは 0。測定された中性子・γ線・陽子のエネルギー、太陽の光と照らします。</p>
+        <p><b>読みB「源が質量ではない」</b>：質（要素数）は前後で変わらず、出るエネルギーは量（力・拘束）の差。質の収支が保存されるかと、出る値が測定と合うかを見ます。合うことは、量の差を力から計算で出せたことまでは意味しません。</p>
+        <p><b>読みC「比重の誤り」</b>：観測している質量は空間に対する比重で、本当の質量より「占める空間の数 × 空間1つの質量」だけ小さく見えている。見かけの質量欠損は空間の数が変わった分、とする読み。空間1つの質量を一つの反応で合わせ、ほかの反応を予測します。</p>
+        <p>計算の記録と検算は <a href="28-fusion-energy-balance.md">28-fusion-energy-balance.md</a> と <code>docs/03-verification/python-scripts/28-verify-fusion-energy-balance.py</code>。</p>
+      </div>
+    </details>
+  </section>
+</main>
+<footer>川上真潔（Kawakami Naoyuki）· JA0XUY · <a href="https://github.com/kiki054-n/tub-tmcc">tub-tmcc</a> · <a href="https://github.com/kiki054-n/JA0XUY-BPFF/tree/main/compass">立体羅針盤</a> · MIT</footer>
+
+<script>
+(() => {
+'use strict';
+const U = 931.49410242, eV = 1e-6;
+const DEFAULT = () => ({
+  antiNeg: true,
+  ref: 'pp',
+  sp: {
+    e:   { name: '電子 e⁻',        m: 0.51099895000,       c: { e: 1 },               s: 1 },
+    ebar:{ name: '陽電子 e⁺',      m: 0.51099895000,       c: { ebar: 1 },            s: 1 },
+    p:   { name: '陽子 p',          m: 938.27208816,        c: { p: 1 },               s: 1 },
+    n:   { name: '中性子 n',        m: 939.56542052,        c: { n: 1 },               s: 1 },
+    H:   { name: '水素原子 H',      m: 1.00782503223 * U,   c: { p: 1, e: 1 },         s: 1 },
+    H2:  { name: '水素分子 H₂',     m: 2 * 1.00782503223 * U - 4.4781 * eV, c: { p: 2, e: 2 }, s: 2 },
+    D:   { name: '重水素原子 D',    m: 2.01410177812 * U,   c: { p: 1, n: 1, e: 1 },   s: 1 },
+    T:   { name: '三重水素原子 T',  m: 3.01604928132 * U,   c: { p: 1, n: 2, e: 1 },   s: 1 },
+    He3: { name: 'ヘリウム3原子',   m: 3.01602932197 * U,   c: { p: 2, n: 1, e: 2 },   s: 1 },
+    He4: { name: 'ヘリウム4原子',   m: 4.00260325413 * U,   c: { p: 2, n: 2, e: 2 },   s: 1 },
+    g:   { name: '光子 γ',          m: 0,                   c: {},                     s: 0 },
+    nu:  { name: 'ニュートリノ ν',  m: 0,                   c: {},                     s: 0 }
+  },
+  q: { e: 500, p: 1500, n: 2000 }
+});
+// 反応：before / after は [粒子, 個数]。light は二体のときの軽い方（取り分を出す）
+const REACT = [
+  { id: 'pp',   name: '水素原子4つ → ヘリウム（太陽）', before: [['H', 4]], after: [['He4', 1], ['nu', 2]],
+    obs: '太陽の光（地球で 1361 W/m²）。ニュートリノ予測 約6.5×10¹⁰ /cm²/s、測定 pp だけで約6.1×10¹⁰', fusion: true },
+  { id: 'h2',   name: '水素分子2つ → ヘリウム', before: [['H2', 2]], after: [['He4', 1], ['nu', 2]],
+    obs: '原子から出発した場合との差は 9 eV', fusion: true },
+  { id: 'dt',   name: 'D + T → He4 + n', before: [['D', 1], ['T', 1]], after: [['He4', 1], ['n', 1]], light: 'n', heavy: 'He4',
+    obs: '中性子 14.1 MeV', obsV: 14.1, fusion: true },
+  { id: 'ddn',  name: 'D + D → He3 + n', before: [['D', 2]], after: [['He3', 1], ['n', 1]], light: 'n', heavy: 'He3',
+    obs: '中性子 2.45 MeV', obsV: 2.45, fusion: true },
+  { id: 'ddp',  name: 'D + D → T + p', before: [['D', 2]], after: [['T', 1], ['H', 1]], light: 'H', heavy: 'T',
+    obs: '陽子 3.02 MeV', obsV: 3.02, fusion: true },
+  { id: 'pn',   name: 'p + n → D + γ', before: [['H', 1], ['n', 1]], after: [['D', 1], ['g', 1]], light: 'g', heavy: 'D',
+    obs: 'γ線 2.2232 MeV', obsV: 2.2232, fusion: true },
+  { id: 'beta', name: 'n → p + e + ν̄', before: [['n', 1]], after: [['H', 1], ['nu', 1]],
+    obs: '電子の上限 0.782 MeV', obsV: 0.782 },
+  { id: 'ann',  name: 'e⁻ + e⁺ → γγ', before: [['e', 1], ['ebar', 1]], after: [['g', 2]],
+    obs: 'γ線 0.511 MeV × 2', obsV: 1.022 },
+  { id: 'chem', name: 'H + H → H₂（化学、比較用）', before: [['H', 2]], after: [['H2', 1]],
+    obs: '解離エネルギー 4.478 eV', obsV: 4.478e-6 }
+];
+
+const KEY = 'tub-tmcc:fusion-compass:v1';
+let S;
+try { S = JSON.parse(localStorage.getItem(KEY)) || DEFAULT(); } catch (e) { S = DEFAULT(); }
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+const $ = id => document.getElementById(id);
+
+function qualOf(k) {
+  const c = S.sp[k].c;
+  return (c.p || 0) * S.q.p + (c.n || 0) * S.q.n + (c.e || 0) * S.q.e + (c.ebar || 0) * (S.antiNeg ? -S.q.e : S.q.e);
+}
+const sum = (list, f) => list.reduce((a, [k, n]) => a + n * f(k), 0);
+function calc(r) {
+  const Q = sum(r.before, k => S.sp[k].m) - sum(r.after, k => S.sp[k].m);
+  const qb = sum(r.before, qualOf), qa = sum(r.after, qualOf);
+  const ds = sum(r.before, k => S.sp[k].s) - sum(r.after, k => S.sp[k].s);
+  let share = null;
+  if (r.light) {
+    const ml = S.sp[r.light].m, mh = S.sp[r.heavy].m;
+    share = ml === 0 ? Q - Q * Q / (2 * mh) : Q * mh / (ml + mh);
+  }
+  return { Q, qb, qa, ds, share };
+}
+const fmtQ = q => q === 0 ? '0' : Math.abs(q) >= 1e-3 ? q.toFixed(4) : (q / eV).toFixed(3) + ' eV';
+
+function render() {
+  const res = REACT.map(r => ({ r, ...calc(r) }));
+  // 読みC：参照反応で空間1つの質量を決める
+  const ref = res.find(x => x.r.id === S.ref);
+  const k = ref && ref.ds ? ref.Q / ref.ds : NaN;
+  $('kOut').textContent = isFinite(k) ? `空間1つの質量 = ${k.toFixed(4)} MeV` : 'この反応は Δ空間 = 0 なので合わせられません';
+  res.forEach(x => { x.C = isFinite(k) ? x.ds * k : NaN; });
+
+  // 表
+  $('rtab').innerHTML = res.map(x => {
+    const qOk = x.qb === x.qa;
+    const cTxt = isFinite(x.C) ? fmtQ(x.C) : '―';
+    const cBad = isFinite(x.C) && Math.abs(x.C - x.Q) > Math.max(0.01 * Math.abs(x.Q), 1e-9);
+    return `<tr><td>${x.r.name}</td><td class="num">${fmtQ(x.Q)}</td><td>${x.r.obs}</td>
+      <td class="num">${x.share != null ? x.share.toFixed(4) : ''}</td>
+      <td class="num ${qOk ? 'ok' : 'ng'}">${x.qb} → ${x.qa}</td>
+      <td class="num">${x.ds > 0 ? '+' : ''}${x.ds}</td>
+      <td class="num ${cBad ? 'ng' : 'ok'}">${cTxt}</td></tr>`;
+  }).join('');
+
+  // 判定
+  const fus = res.filter(x => x.r.fusion);
+  const qBroken = res.filter(x => x.qb !== x.qa);
+  const cMiss = res.filter(x => isFinite(x.C) && Math.abs(x.C - x.Q) > Math.max(0.01 * Math.abs(x.Q), 1e-9));
+  const ddn = res.find(x => x.r.id === 'ddn'), ddp = res.find(x => x.r.id === 'ddp');
+  const dt = res.find(x => x.r.id === 'dt');
+  $('verdicts').innerHTML = `
+    <div class="rd A"><h3>読みA　出力そのものがない</h3><div class="claim">核融合で外へ出るエネルギーは 0</div>
+      <div class="verdict">測定と合わない</div>
+      <div class="why">核融合 ${fus.length} 反応すべてで出力が測られている。D-T の中性子は計算 ${dt.share.toFixed(2)} MeV、測定 14.1 MeV。太陽が光っていること自体が反例。</div></div>
+    <div class="rd B"><h3>読みB　源が質量ではない</h3><div class="claim">質は保存、出るのは量（力・拘束）の差</div>
+      <div class="verdict">${qBroken.length ? `質が ${qBroken.length} 反応で保存されない` : '矛盾はない（予測はまだない）'}</div>
+      <div class="why">${qBroken.length ? `保存されない反応：${qBroken.map(x => x.r.name).join('、')}。反電子を −500（双極）にすると保存されます。` : '質は全反応で保存。ただし質＝2000×バリオン数 − 500×電荷 と書け、既知の二つの保存則と同じ中身。出る値は測定どおりだが、それは質量の差をそのまま使ったから。ヘリウムの 28.30 MeV を力から出せたときに、初めて予測になる。'}</div></div>
+    <div class="rd C"><h3>読みC　比重の誤り</h3><div class="claim">見かけの欠損は空間の数の変化</div>
+      <div class="verdict">${cMiss.length ? `${cMiss.length} 反応で合わない` : 'すべて合う'}</div>
+      <div class="why">D + D から He3 + n（${ddn.Q.toFixed(3)} MeV）と T + p（${ddp.Q.toFixed(3)} MeV）。空間の数が同じ（Δ空間 ${ddn.ds} と ${ddp.ds}）なら同じ値になるはずが、違う。粒子ごとに空間の数を変えて合わせると、それは質量を言い換えただけになる。</div></div>`;
+
+  // 横棒（対数）
+  const svg = $('bars');
+  const W = Math.max(svg.clientWidth || 700, 560), rowH = 46, left = 220, right = 20, top = 22;
+  const H = top + res.length * rowH + 30;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`); svg.setAttribute('height', H);
+  const lo = -7, hi = 2;   // 10^-7 〜 10^2 MeV
+  const xs = v => left + (Math.log10(Math.max(v, 10 ** lo)) - lo) / (hi - lo) * (W - left - right);
+  let g = '';
+  for (let d = lo; d <= hi; d++) {
+    const x = xs(10 ** d);
+    g += `<line x1="${x}" x2="${x}" y1="${top - 6}" y2="${H - 24}" stroke="rgba(26,26,26,${d === 0 ? 0.25 : 0.08})"/>`;
+    g += `<text x="${x}" y="${H - 8}" font-size="10" fill="#6b6560" text-anchor="middle">${d === 0 ? '1 MeV' : d === -6 ? '1 eV' : d === -3 ? '1 keV' : '10' + (d < 0 ? '⁻' : '') + '⁰¹²³⁴⁵⁶⁷⁸⁹'[Math.abs(d)]}</text>`;
+  }
+  res.forEach((x, i) => {
+    const y = top + i * rowH;
+    g += `<text x="${left - 8}" y="${y + 15}" font-size="12" fill="#1a1a1a" text-anchor="end">${x.r.name.replace(/（.*）/, '')}</text>`;
+    g += `<rect x="${left}" y="${y + 4}" width="${Math.max(xs(Math.abs(x.Q)) - left, 1)}" height="12" fill="#1a1a1a" rx="2"/>`;
+    g += `<text x="${xs(Math.abs(x.Q)) + 4}" y="${y + 14}" font-size="10" fill="#1a1a1a">${fmtQ(x.Q)}</text>`;
+    // A: 0
+    g += `<circle cx="${left}" cy="${y + 26}" r="4" fill="var(--rA)"/><text x="${left + 8}" y="${y + 29}" font-size="10" fill="#b23a2e">A：0</text>`;
+    // C
+    if (isFinite(x.C)) {
+      if (x.C > 0) {
+        g += `<rect x="${left + 40}" y="${y + 21}" width="${Math.max(xs(x.C) - left - 40, 1)}" height="9" fill="#5b5f8a" opacity="0.8" rx="2"/>`;
+        g += `<text x="${xs(x.C) + 4}" y="${y + 29}" font-size="10" fill="#5b5f8a">C：${fmtQ(x.C)}</text>`;
+      } else {
+        g += `<text x="${left + 44}" y="${y + 29}" font-size="10" fill="#5b5f8a">C：${x.C === 0 ? '0（Δ空間 0）' : fmtQ(x.C)}</text>`;
+      }
+    }
+  });
+  svg.innerHTML = g;
+}
+
+function renderInputs() {
+  $('antiNeg').checked = S.antiNeg;
+  $('refSel').innerHTML = REACT.map(r => `<option value="${r.id}" ${r.id === S.ref ? 'selected' : ''}>${r.name}</option>`).join('');
+  const comp = c => Object.entries(c).map(([k, n]) => `${{ p: '陽子', n: '中性子', e: '電子', ebar: '陽電子' }[k]}${n > 1 ? '×' + n : ''}`).join('＋') || '―';
+  const rows = Object.entries(S.sp).map(([k, s]) => `<tr><td>${s.name}</td>
+    <td class="num"><input class="n" type="number" step="any" data-k="${k}" data-f="m" value="${s.m}"></td>
+    <td>${comp(s.c)}</td><td class="num" data-q="${k}">${qualOf(k)}</td>
+    <td class="num" style="width:6rem"><input class="n" type="number" step="1" data-k="${k}" data-f="s" value="${s.s}"></td></tr>`);
+  rows.push(`<tr><td colspan="3">質の単位：電子・陽子・中性子</td><td class="num" colspan="2" style="white-space:nowrap">
+    <input class="n" type="number" style="width:4.5rem" data-q-unit="e" value="${S.q.e}">
+    <input class="n" type="number" style="width:4.5rem" data-q-unit="p" value="${S.q.p}">
+    <input class="n" type="number" style="width:4.5rem" data-q-unit="n" value="${S.q.n}"></td></tr>`);
+  $('itab').innerHTML = rows.join('');
+  $('itab').querySelectorAll('input[data-k]').forEach(inp => inp.oninput = () => {
+    const v = parseFloat(inp.value); if (!isFinite(v)) return;
+    S.sp[inp.dataset.k][inp.dataset.f] = v; save(); render();
+  });
+  $('itab').querySelectorAll('input[data-q-unit]').forEach(inp => inp.oninput = () => {
+    const v = parseFloat(inp.value); if (!isFinite(v)) return;
+    S.q[inp.dataset.qUnit] = v; save(); refreshQual(); render();
+  });
+}
+function refreshQual() { document.querySelectorAll('[data-q]').forEach(td => td.textContent = qualOf(td.dataset.q)); }
+$('antiNeg').onchange = e => { S.antiNeg = e.target.checked; save(); refreshQual(); render(); };
+$('refSel').onchange = e => { S.ref = e.target.value; save(); render(); };
+$('reset').onclick = () => { S = DEFAULT(); save(); renderInputs(); render(); };
+window.addEventListener('resize', render);
+renderInputs(); render();
+})();
+</script>
+</body>
+</html>

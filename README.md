@@ -72,6 +72,7 @@ M：質（要素数）。不変。
 | `docs/25-time-boundary/25-time-boundary-pressure.md` | 時間軸（過去・現在・未来の三時刻の式）・境界・誕生の段 T1〜T5・境界の圧力34 と宇宙定数・記号 F±/B/I/π（2026-11-08）。検証：`25-verify-time-boundary-pressure.py` |
 | `docs/26-polyhedra-magnetic-binding/26-polyhedra-magnetic-binding.md` | 多面体の要素数（2E、n角双錘は6n）・双錘のねじれの条件・3で平面4で空間の中和・陽子と中性子の磁気モーメント（比 −2/3）と臍・重水素とヘリウム4と水素分子の見えない抱き合う力（2026-11-08 夜）。検証：`26-verify-polyhedra-magnetic-binding.py` |
 | `docs/27-sign-parity-pairing/27-sign-parity-pairing.md` | 符号の交互（XYZπ＝1・FBIπ＝1、奇数は開き偶数は閉じる）と対形成の照合：電子数の偶奇（O₂ は反例）・天然核種286の Z-N 偶奇（偶-偶58.4%、奇-奇3.1%、軽い奇-奇はすべて Z＝N）（2026-11-09）。検証：`27-verify-sign-parity-pairing.py` |
+| `docs/28-fusion-energy-balance/28-fusion-energy-balance.md` | 水素核融合のエネルギー収支：読みA（出力0）・B（質は保存、出るのは量）・C（比重の誤り）を同じ入力で照合。A・C は測定と合わず、B は矛盾なし（質＝2000×バリオン数−500×電荷、陽電子−500）。次はヘリウム 28.30 MeV を力から出す（2026-11-10）。検証：`28-verify-fusion-energy-balance.py`、シミュレーター：`simulator.html` |
 
 ### 検証・計算記録
 
